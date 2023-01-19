@@ -1,27 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="jumbotron text-center">
-        <h3 class="lobster">Currency Rates!</h3>
-        <p>What a wonderful App this is!</p>
+        <p>Your Profile</p>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <h3 class="lobster">Currency Rates!</h3>
-                <p>Using this app, you can get exchange rates easily!</p>
-            </div>
+            <h3 class="lobster">Name</h3>
+            <p>Robin Lee</p>
+        </div>
+        <div class="col-sm-4">
+            <h3 class="lobster">Age</h3>
+            <p> 26</p>
+        </div>
             <div class="col-sm-4">
-                <h3 class="lobster">Navigation!</h3>
-                <p> Please choose an action from the following options
-                <p>
-                    <a href="{% url 'maintenance' %}">Do maintenance</a><br>
-                    Get rates<br>
-                    Other stuff<br></p>
-            </div>
-            <div class="col-sm-4">
-                <h3 class="lobster">The future!</h3>
-                <p>Soon, you will be able to invest your money by buying, selling and saving in any currency!</p>
+                <h3 class="lobster">Sex</h3>
+                <p>Female</p>
             </div>
         </div>
     </div>
+{#<form action="{% url 'match_attributes' %}" method="get">#}
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+            <h4>Please select the attribute that best describes you</h4>
+                <select class="form-control data-inline-block" id="your_attribute">
+                {% for a in attributes %}
+                    <option value= {a.character}></option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <h4>Please select the attribute that you want in a partner</h4>
+                <select class="form-control" id="partner_attribute">
+                    {% for a in attributes %}
+                        <option value= "{{a.character}}"></option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+<input type="submit" value="Match!">
+</form>
 {% endblock %}

@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import dj_database_url
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-j9=jz)13g4bf@@#t@d&b7hj^p&(=#fnsj)r&x+a&gla_!_n9zr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["kl3212-webapps1.onrender.com","kl3212-djangoproject1.onrender.com", '127.0.0.1']
+ALLOWED_HOSTS = ["groupproject-pnqy.onrender.com","kl3212-djangoproject1.onrender.com", '127.0.0.1']
 
 
 # Application definition

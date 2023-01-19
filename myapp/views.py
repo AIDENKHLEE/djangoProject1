@@ -57,6 +57,6 @@ def match(request):
 
 def view_attributes(request):
     data=dict()
-    a_list = ["honesty", 'intelligent']
+    a_list = Attribute.objects.all()
     data['attributes'] = a_list
-    return render(request, 'home.html',data)
+    return render(request, 'home.html', context=data)

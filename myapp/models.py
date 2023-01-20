@@ -25,7 +25,7 @@ class Attribute(models.Model):
         return str(self.character)
 
 class AccountHolder(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     date_of_birth = models.DateField()
     user_visited = models.ManyToManyField(Attribute)
     # Need to check if it is right to input Attribute in this field

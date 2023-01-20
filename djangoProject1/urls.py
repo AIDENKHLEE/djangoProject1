@@ -28,6 +28,6 @@ urlpatterns = [
     path('match', views.match, name= 'match'),
     path('register_user',views.register_new_user,name='register_user'),
     path('map',views.map,name="map"),
-    path('confirmation', views.confirmation, name='confirmation')
+    path('match/', views.confirm_match, name='confirm_match'),
 ]
 

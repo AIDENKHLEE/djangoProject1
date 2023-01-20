@@ -5,7 +5,19 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        Please enter your date of birth <input type="date" name="dob"><br>
+        Please enter your name
+        <input type="text" name="name"><br>
+        Please enter your age
+        <input type="text" name="age"><br>
+        Please select your gender
+        <label>
+            <input type="radio" name="male">
+            Male
+        </label>
+        <label>
+            <input type="radio" name="female">
+            Female
+        </label><br>
         <button type="submit">Register</button>
     </form>
 {% endblock %}

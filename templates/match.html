@@ -6,36 +6,49 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-            <h3 class="lobster">Match 1</h3>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Sex</th>
-                </tr>
-                <tr>
-                    <td>{{ first_result.name }}</td>
-                    <td>{{ first_result.age }}</td>
-                    <td>{{ first_result.sex }}</td>
-                </tr>
-            </table>
-        <input type="submit" value="Match!">
-        </div>
-        <div class="col-sm-4">
-            <h3 class="lobster">Match 2</h3>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Sex</th>
-                </tr>
-                <tr>
-                    <td>{{ second_result.name }}</td>
-                    <td>{{ second_result.age }}</td>
-                    <td>{{ second_result.sex }}</td>
-                </tr>
-            </table>
-        <input type="submit" value="Match!">
+                <h3 class="lobster">Match 1</h3>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Sex</th>
+                    </tr>
+                    <tr>
+                        <td>{{ first_result.name }}</td>
+                        <td>{{ first_result.age }}</td>
+                        <td>{{ first_result.sex }}</td>
+                    </tr>
+                </table>
+                <form action="{% url 'confirm_match' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="match_name" value="{{ first_result.name }}">
+                    <input type="hidden" name="match_age" value="{{ first_result.age }}">
+                    <input type="hidden" name="match_sex" value="{{ first_result.sex }}">
+                    <input type="submit" value="Match!">
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <h3 class="lobster">Match 2</h3>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Sex</th>
+                    </tr>
+                    <tr>
+                        <td>{{ second_result.name }}</td>
+                        <td>{{ second_result.age }}</td>
+                        <td>{{ second_result.sex }}</td>
+                    </tr>
+                </table>
+                <form action="{% url 'confirm_match' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="match_name" value="{{ second_result.name }}">
+                    <input type="hidden" name="match_age" value="{{ second_result.age }}">
+                    <input type="hidden" name="match_sex" value="{{ second_result.sex }}">
+                    <input type="submit" value="Match!">
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

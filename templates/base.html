@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
 </head>
 <body>
-<img src='{% static "myapp/logo.png" %}' alt="image" width="400px">
+<img src='{% static "myapp/logo1.png" %}' alt="image" width="400px">
     <span style="float:right;">
         {% if user.username %}
-            <span class="large-font">Hello {{ user.username }}!</span><br>
+            <span class="large-font">Hello {{ user.age }}!</span><br>
             <a href="{% url 'logout' %}"><button>logout</button></a>
         {% else %}
             <span class="large-font">Hello Anonymous User!</span><br>
@@ -23,6 +23,8 @@
     </span>
     {% block content %}
         <-- This is where the page content will go! -->
+    {% endblock %}
+    {% block extra_scripts %}
     {% endblock %}
     <div id="footer">
         ©2023 Columbia Business School. All Rights Reserved

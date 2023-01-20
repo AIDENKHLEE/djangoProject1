@@ -1,25 +1,34 @@
 h1 {
-color: #d0452d;
+    color: #d0452d;
+    text-shadow: 2px 2px #f2f2f2;
+    font-size: 48px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 #footer { /* use with id = "footer" */
-display:inline-block;
-width:100%;
-height:1em;
-padding: 2em 0.25em;
-text-align: center;
-font-size: xx-small;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    width: 100%;
+    padding: 2em;
+    font-size: 12px;
 }
 
 .large-font { /* use with class="large-font" */
-font-size: large;
-color: crimson;
+    font-size: 36px;
+    color: #d0452d;
+    font-weight: bold;
+    text-shadow: 2px 2px #f2f2f2;
 }
 
 .lobster {
-color: coral;
-font-family: 'lobster';
-font-size: 36px;
+    color: coral;
+    font-family: 'lobster', cursive;
+    font-size: 36px;
+    text-shadow: 2px 2px #f2f2f2;
 }
 
 .background {
@@ -35,18 +44,67 @@ font-size: 36px;
     background-color: rgba(0, 0, 0, 0.6);
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px 0px #f2f2f2;
+}
 
- #table-container {
-        width: 50%;
-        margin: 0 auto;
-      }
-      .match-table {
-        border-collapse: collapse;
-      }
-      .match-table td, .match-table th {
-        border: 1px gray;
-        padding: 8px;
-      }
-      .match-table th {
-        text-align: center;
-      }
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+    transition: all 0.2s ease-in-out;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+a {
+    text-decoration: none;
+    color: #d0452d;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+    color: coral;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.jumbotron {
+    background-color: #d0452d;
+    color: #f5f5f5;
+    padding: 3em;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-sm-4 {
+    flex-basis: 33px;}
+

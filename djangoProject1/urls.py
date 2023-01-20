@@ -27,5 +27,6 @@ urlpatterns = [
     path('maintenance',views.maintenance,name='maintenance'),
     path('match', views.match, name= "match"),
     path('register',views.register_new_user,name="register_user"),
+    path('map',views.map,name="map"),
 ]
 

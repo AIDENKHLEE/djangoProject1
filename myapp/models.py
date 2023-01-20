@@ -1,6 +1,5 @@
 from django.db import models
-
-
+from django.contrib.auth.models import User
 
 class User(models.Model):
     name = models.CharField(max_length=20)
@@ -25,3 +24,12 @@ class Attribute(models.Model):
     def __str__(self):
         return str(self.character)
 
+class AccountHolder(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    date_of_birth = models.DateField()
+    user_visited = models.ManyToManyField(Attribute)
+    # Need to check if it is right to input Attribute in this field
+    def __str__(self):
+        return self.user.username
+    def __repr__(self):
+        return self.user.username

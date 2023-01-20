@@ -1,10 +1,12 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from myapp import support_functions
 # from myapp.models import Currency
 from django.template.loader import get_template
 from bs4 import BeautifulSoup
 from django.shortcuts import render
-from myapp.models import User, Attribute
+from myapp.models import User, Attribute, AccountHolder
+
 
 
 # Create your views here.
@@ -60,3 +62,18 @@ def view_attributes(request):
     a_list = Attribute.objects.all()
     data['attributes'] = a_list
     return render(request, 'home.html', context=data)
+
+
+def register_new_user(request):
+    context = dict()
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+        new_user = form.save()
+        dob = request.POST["dob"]
+        acct_holder = AccountHolder(user=new_user,date_of_birth=dob)
+        acct_holder.save()
+        return render(request,"home.html",context=dict())
+    else:
+        form = UserCreationForm()
+        context['form'] = form
+    return render(request, "registration/register.html", context)

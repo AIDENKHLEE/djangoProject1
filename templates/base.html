@@ -10,12 +10,22 @@
     <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
 </head>
 <body>
-    <h1 class=“large-font">Welcome back!</h1>
+<img src='{% static "myapp/logo.png" %}' alt="image" width="400px">
+    <span style="float:right;">
+        {% if user.username %}
+            <span class="large-font">Hello {{ user.username }}!</span><br>
+            <a href="{% url 'logout' %}"><button>logout</button></a>
+        {% else %}
+            <span class="large-font">Hello Anonymous User!</span><br>
+            <a href="{% url 'login' %}"><button>login</button></a>/
+            <a href=“{% url 'register_user' %}"><button>register</button></a>
+        {% endif %}
+    </span>
     {% block content %}
-<-- This is where the page content will go! -->
+        <-- This is where the page content will go! -->
     {% endblock %}
     <div id="footer">
-    ©2023 Personality Matching. All Rights Reserved
+        ©2023 Columbia Business School. All Rights Reserved
     </div>
 </body>
 </html>

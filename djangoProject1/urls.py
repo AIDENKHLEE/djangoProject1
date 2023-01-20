@@ -23,10 +23,11 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('home', views.home, name='home'),
     path('home', views.home, name='home1'),
-    path('',views.view_attributes,name="home"),
+    path('',views.view_attributes,name='home'),
     path('maintenance',views.maintenance,name='maintenance'),
-    path('match', views.match, name= "match"),
-    path('register',views.register_new_user,name="register_user"),
+    path('match', views.match, name= 'match'),
+    path('register_user',views.register_new_user,name='register_user'),
     path('map',views.map,name="map"),
+    path('confirmation', views.confirmation, name='confirmation')
 ]
 

@@ -1,5 +1,5 @@
 h1 {
-color: #d726c4;
+color: #d0452d;
 }
 
 #footer { /* use with id = "footer" */
@@ -21,3 +21,32 @@ color: coral;
 font-family: 'lobster';
 font-size: 36px;
 }
+
+.background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4000;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+ #table-container {
+        width: 50%;
+        margin: 0 auto;
+      }
+      .match-table {
+        border-collapse: collapse;
+      }
+      .match-table td, .match-table th {
+        border: 1px gray;
+        padding: 8px;
+      }
+      .match-table th {
+        text-align: center;
+      }

@@ -19,12 +19,12 @@
             </div>
         </div>
     </div>
-{#<form action="{% url 'match_attributes' %}" method="get">#}
+<form action="{% url 'match' %}" method="get">
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
             <h4>Please select the attribute that best describes you</h4>
-                <select class="form-control data-inline-block" id="your_attribute">
+                <select class="form-control data-inline-block" name="your_attribute">
                 {% for a in attributes %}
                     <option value= "{{a.character}}">{{a.character}}</option>
                 {% endfor %}
@@ -34,7 +34,7 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <h4>Please select the attribute that you want in a partner</h4>
-                <select class="form-control" id="partner_attribute">
+                <select class="form-control" name="partner_attribute">
                     {% for a in attributes %}
                         <option value= "{{a.character}}">{{a.character}}</option>
                     {% endfor %}

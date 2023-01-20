@@ -16,7 +16,8 @@ def home(request):
     import datetime
     time = datetime.datetime.now()
     data["time_of_day"] = time
-    return render(request,"home.html", context=data)
+    return render(request, "home.html", context=data)
+
 
 # from django.http import HttpResponseRedirect
 # from django.urls import reverse
@@ -32,18 +33,19 @@ def maintenance(request):
     #         return HttpResponseRedirect(reverse('currencies'))
     # except:
     #     pass
-    return render(request,"maintenance.html",context=data)
+    return render(request, "maintenance.html", context=data)
+
 
 def match(request):
     template = get_template('home.html')
     html = template.render({'key': 'value'})
     soup = BeautifulSoup(html, 'html.parser')
 
-    dropdown = soup.find(id = "partner_attribute")
+    dropdown = soup.find(id="partner_attribute")
     selected_option = dropdown.find("option", selected=True)
     match_attribute = selected_option["value"]
 
-    data=dict()
+    data = dict()
     try:
         rows = User.objects.filter(self_attribute=match_attribute)
         match_results = list(rows)
@@ -58,7 +60,7 @@ def match(request):
 
 
 def view_attributes(request):
-    data=dict()
+    data = dict()
     a_list = Attribute.objects.all()
     data['attributes'] = a_list
     return render(request, 'home.html', context=data)
@@ -70,13 +72,14 @@ def register_new_user(request):
     if form.is_valid():
         new_user = form.save()
         dob = request.POST["dob"]
-        acct_holder = AccountHolder(user=new_user,date_of_birth=dob)
+        acct_holder = AccountHolder(user=new_user, date_of_birth=dob)
         acct_holder.save()
-        return render(request,"home.html",context=dict())
+        return render(request, "home.html", context=dict())
     else:
         form = UserCreationForm()
         context['form'] = form
     return render(request, "registration/register.html", context)
+
 
 def map(request):
     data = dict()
@@ -96,7 +99,7 @@ def map(request):
         number_of_cities = int(request.GET['number_of_cities'])
         visiting_cities = list()
         for i in range(number_of_cities):
-            name = "city" + str(i+1)
+            name = "city" + str(i + 1)
             city_name = request.GET[name]
             visiting_cities.append(city_name)
         m = support_functions.add_markers(m, visiting_cities)
@@ -113,7 +116,7 @@ def map(request):
         if number_of_cities > 0:
             names = list()
             for i in range(number_of_cities):
-                names.append("city" + str(i+1))
+                names.append("city" + str(i + 1))
             data['names'] = names
             data['number_of_cities'] = number_of_cities
         m = m._repr_html_
@@ -125,4 +128,13 @@ def map(request):
     return render(request, "map.html", context=data)
 
 
-
+def match(request):
+    data = dict()
+    try:
+        match_attribute = request.GET['partner_attribute']
+        m = User.objects.filter(self_attribute=match_attribute)
+        data['first_result'] = m[0]
+        data['second_result'] = m[1]
+    except:
+        pass
+    return render(request, "match.html", data)

@@ -2,6 +2,7 @@
 {% block content %}
     <div class="jumbotron text-center">
         <p>Your Profile</p>
+    {% if user.username %}
     </div>
     <div class="container">
         <div class="row">
@@ -11,14 +12,34 @@
         </div>
         <div class="col-sm-4">
             <h3 class="lobster">Age</h3>
-            <p> 26</p>
+            <p> {{ user.age }}</p>
         </div>
             <div class="col-sm-4">
                 <h3 class="lobster">Sex</h3>
-                <p>Female</p>
+                <p>{{ user.sex }}</p>
             </div>
         </div>
     </div>
+    {% else %}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+            <h3 class="lobster">Name</h3>
+            <p>Please register</p>
+        </div>
+        <div class="col-sm-4">
+            <h3 class="lobster">Age</h3>
+            <p>Please register</p>
+        </div>
+            <div class="col-sm-4">
+                <h3 class="lobster">Sex</h3>
+                <p>Please register</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
 <form action="{% url 'match' %}" method="get">
     <div class="row">
         <div class="col-sm-6">
@@ -45,4 +66,3 @@
 <input type="submit" value="Match!">
 </form>
 {% endblock %}
-

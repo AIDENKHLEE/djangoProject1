@@ -1,7 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm
+"""
+
 from django.shortcuts import render
 from myapp import support_functions
 # from myapp.models import Currency
+from django.contrib.auth.forms import UserCreationForm
 from django.template.loader import get_template
 from bs4 import BeautifulSoup
 from django.shortcuts import render
@@ -165,3 +167,92 @@ def register_new_user(request):
         form = UserCreationForm()
         context['form'] = form
         return render(request, "registration/register.html", context)
+"""
+
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render
+from myapp import support_functions
+# from myapp.models import Currency
+from django.template.loader import get_template
+from bs4 import BeautifulSoup
+from django.shortcuts import render
+from myapp.models import Attribute, AccountHolder
+import folium
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
+# Create your views here.
+
+def home(request):
+    data = dict()
+    import datetime
+    time = datetime.datetime.now()
+    data["time_of_day"] = time
+    return render(request, "home.html", context=data)
+
+
+def match(request):
+    template = get_template('home.html')
+    html = template.render({'key': 'value'})
+    soup = BeautifulSoup(html, 'html.parser')
+
+    dropdown = soup.find(id="partner_attribute")
+    selected_option = dropdown.find("option", selected=True)
+    match_attribute = selected_option["value"]
+
+    data = dict()
+    try:
+        rows = AccountHolder.objects.filter(self_attribute=match_attribute)
+        match_results = list(rows)
+        first_result = match_results[0]
+        second_result = match_results[-1]
+
+        data['first_result'] = first_result
+        data['second_result'] = second_result
+    except:
+        pass
+    return render(request, "match.html", context=data)
+
+
+def view_attributes(request):
+    data = dict()
+    a_list = Attribute.objects.all()
+    data['attributes'] = a_list
+    return render(request, 'home.html', context=data)
+
+def match(request):
+    data = dict()
+    try:
+        match_attribute = request.GET['partner_attribute']
+        m = AccountHolder.objects.filter(self_attribute=match_attribute)
+        data['first_result'] = m[0]
+        data['second_result'] = m[1]
+    except:
+        pass
+    return render(request, "match.html", data)
+
+from django.shortcuts import render
+
+def confirm_match(request):
+    if request.method == 'POST':
+        your_attribute = request.POST.get('your_attribute')
+        partner_attribute = request.POST.get('partner_attribute')
+        return render(request, 'confirmation.html', {'your_attribute': your_attribute, 'partner_attribute': partner_attribute})
+
+def register_new_user(request):
+    context = dict()
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+        new_user = form.save()
+        name = request.POST['name']
+        age = request.POST["age"]
+        sex = request.POST["sex"]
+        acct_holder=AccountHolder(user=new_user, name=name, age=age, sex=sex)
+        acct_holder.save()
+        return render(request,"home.html", context=dict())
+    else:
+        form = UserCreationForm()
+        context['form'] = form
+        return render(request, "registration/register.html", context)
+

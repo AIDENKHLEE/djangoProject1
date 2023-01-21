@@ -13,7 +13,7 @@
 <img src='{% static "myapp/logo1.png" %}' alt="image" width="400px">
     <span style="float:right;">
         {% if user.username %}
-            <span class="large-font">Hello {{ user.age }}!</span><br>
+            <span class="large-font">Hello {{ user.name }}!</span><br>
             <a href="{% url 'logout' %}"><button>logout</button></a>
         {% else %}
             <span class="large-font">Hello Anonymous User!</span><br>
@@ -27,7 +27,7 @@
     {% block extra_scripts %}
     {% endblock %}
     <div id="footer">
-        ©2023 Columbia Business School. All Rights Reserved
+        ©2023 nbyn. All Rights Reserved
     </div>
 </body>
 </html>

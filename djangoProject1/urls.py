@@ -26,8 +26,8 @@ urlpatterns = [
     path('',views.view_attributes,name='home'),
    # path('maintenance',views.maintenance,name='maintenance'),
     path('match', views.match, name= 'match'),
-    path('registration/register',views.register_new_user,name='register_user'),
+    path('register',views.register_new_user,name='register_user'),
    # path('map',views.map,name="map"),
-    path('match/', views.confirm_match, name='confirm_match'),
+    path('confirm_match', views.confirm_match, name='confirm_match'),
 ]
 

@@ -147,7 +147,7 @@ def confirm_match(request):
     if request.method == 'POST':
         your_attribute = request.POST.get('your_attribute')
         partner_attribute = request.POST.get('partner_attribute')
-        return render(request, 'confirmation.html', {'your_attribute': your_attribute, 'partner_attribute': partner_attribute})
+        return render(request, 'confirm_match.html', {'your_attribute': your_attribute, 'partner_attribute': partner_attribute})
 
 def register_new_user(request):
     context = dict()
@@ -167,7 +167,6 @@ def register_new_user(request):
         form = UserCreationForm()
         context['form'] = form
         return render(request, "registration/register.html", context)
-"""
 
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
@@ -238,7 +237,7 @@ def confirm_match(request):
     if request.method == 'POST':
         your_attribute = request.POST.get('your_attribute')
         partner_attribute = request.POST.get('partner_attribute')
-        return render(request, 'confirmation.html', {'your_attribute': your_attribute, 'partner_attribute': partner_attribute})
+        return render(request, 'confirm_match.html', {'your_attribute': your_attribute, 'partner_attribute': partner_attribute})
 
 def register_new_user(request):
     context = dict()
@@ -249,10 +248,114 @@ def register_new_user(request):
         age = request.POST["age"]
         sex = request.POST["sex"]
         acct_holder=AccountHolder(user=new_user, name=name, age=age, sex=sex)
-        acct_holder.save()
         return render(request,"home.html", context=dict())
     else:
         form = UserCreationForm()
         context['form'] = form
         return render(request, "registration/register.html", context)
+"""
+
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render
+from myapp import support_functions
+# from myapp.models import Currency
+from django.template.loader import get_template
+from bs4 import BeautifulSoup
+from django.shortcuts import render
+from myapp.models import Attribute, AccountHolder, User
+import folium
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
+# Create your views here.
+
+def home(request):
+    data = dict()
+    import datetime
+    time = datetime.datetime.now()
+    data["time_of_day"] = time
+    attributes = Attribute.objects.all()
+    data['attributes'] = attributes
+    user = request.user
+    try:
+        account_holder = AccountHolder.objects.get(user=user)
+        data['account_holder'] = account_holder
+    except:
+        pass
+    return render(request, "home.html", context=data)
+
+
+def view_attributes(request):
+    data = dict()
+    a_list = Attribute.objects.all()
+    data['attributes'] = a_list
+    return render(request, 'home.html', context=data)
+
+
+def match(request):
+    data = dict()
+    print("matching")
+    try:
+        match_attribute = request.GET['partner_attribute'].strip()
+        print(match_attribute)
+        m = AccountHolder.objects.filter(self_attribute=match_attribute)
+        print(m)
+        data['first_result'] = m[0]
+        data['second_result'] = m[1]
+        print(m[0],m[1])
+    except:
+        pass
+    return render(request, "match.html", data)
+
+
+from django.shortcuts import render
+
+
+def confirm_match(request):
+    if request.method == 'POST':
+        your_attribute = request.POST.get('your_attribute')
+        partner_attribute = request.POST.get('partner_attribute')
+        return render(request, 'confirm_match.html',
+                      {'your_attribute': your_attribute, 'partner_attribute': partner_attribute})
+
+
+# def register_new_user(request):
+#     context = dict()
+#     form = UserCreationForm(request.POST)
+#     if form.is_valid():
+#         new_user = form.save()
+#         acct_holder = AccountHolder(user=new_user)
+#         acct_holder.save()
+#
+#         new_user = AccountHolder(name=request.POST['name'], age=request.POST["age"],
+#                         sex=request.POST["sex"])
+#         new_user.save()
+#
+#         return render(request, "home.html", context=dict())
+#     else:
+#         form = UserCreationForm()
+#         context['form'] = form
+#         return render(request, "registration/register.html", context=context)
+
+
+def register_new_user(request):
+    context = dict()
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+        print("Trying to register")
+        new_user = form.save()
+        print("user saved")
+        name = request.POST['name']
+        age = request.POST["age"]
+        sex = request.POST["sex"]
+        print(name,age,sex)
+        acct_holder = AccountHolder(user=new_user, name = name, age = age, sex = sex)
+        acct_holder.save()
+
+        return render(request, "home.html", context=dict())
+    else:
+        form = UserCreationForm()
+        context['form'] = form
+        return render(request, "registration/register.html", context=context)
 

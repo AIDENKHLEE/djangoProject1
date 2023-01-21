@@ -1,7 +1,7 @@
 h1 {
-    color: #d0452d;
+    color: #d5563e;
     text-shadow: 2px 2px #f2f2f2;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -18,7 +18,7 @@ h1 {
 }
 
 .large-font { /* use with class="large-font" */
-    font-size: 36px;
+    font-size: 32px;
     color: #d0452d;
     font-weight: bold;
     text-shadow: 2px 2px #f2f2f2;
@@ -107,4 +107,3 @@ a:hover {
 
 .col-sm-4 {
     flex-basis: 33px;}
-
